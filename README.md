@@ -1,181 +1,166 @@
-🤖 Jarvis – AI Voice Assistant (Python)
-
-Jarvis is a voice-controlled AI assistant built using Python that can listen to your voice, understand commands, answer questions using Google Gemini AI, and fall back to an offline LLM (Ollama) when the internet is unavailable.
-
-It supports:
-
-🎤 Voice input
-
-🧠 AI-powered responses
-
-🗣️ Text-to-speech output
-
-💤 Wake-word activation (“Jarvis”)
-
-📴 Offline AI fallback
-
-⏰ Built-in system commands (time, date, exit)
-
-✨ Features
-
-Wake Word Detection
-Jarvis stays idle until you say “Jarvis”.
-
-Command + Chat Hybrid
-
-Commands like time, date, sleep are handled instantly.
-
-All other queries go to AI.
-
-Online AI (Gemini 1.5 Flash)
-
-Fast, accurate answers.
-
-Streaming response support.
-
-Offline AI Fallback
-
-Uses Ollama + Mistral if Gemini fails or internet is down.
-
-Text-to-Speech
-
-Converts AI responses into natural voice using gTTS.
-
-🧠 Architecture Overview
-Microphone
-   ↓
-Wake Word Detection ("Jarvis")
-   ↓
-Command Router
-   ├── System Commands (time, date, exit)
-   ├── Gemini AI (online)
-   └── Ollama LLM (offline)
-   ↓
-Text-to-Speech (gTTS)
-   ↓
-Speaker Output
-
-🛠️ Technologies Used
-
-Python 3.9+
-
-speech_recognition
-
-google-generativeai (Gemini)
-
-gTTS
-
-pygame
-
-Ollama (offline LLM)
-
-subprocess
-
-📦 Installation
-1️⃣ Clone the Repository
-git clone https://github.com/your-username/jarvis-ai.git
-cd jarvis-ai
-
-2️⃣ Install Python Dependencies
-pip install speechrecognition google-generativeai gTTS pygame pyaudio
 
 
-⚠️ Windows users (PyAudio issue)
+# 🧠 Jarvis – Voice-Based AI Assistant (Version 1)
 
-pip install pipwin
-pipwin install pyaudio
+Jarvis is a voice-controlled AI assistant built using Python. It listens for a wake word, understands spoken commands, and responds intelligently using the Google Gemini API with an offline AI fallback.
+This project is inspired by the idea of building a real-world personal AI assistant like **Jarvis from Iron Man**.
 
-🧠 Offline AI Setup (Optional but Recommended)
-Install Ollama
+**Current Version:** 1
+**Goal:** To evolve Jarvis into a proper, fully capable AI assistant.
 
-👉 https://ollama.com
+---
 
-Pull a model
+## ✨ Features (Version 1)
+
+* Wake word detection (`"Jarvis"`)
+* Speech-to-text using Google Speech Recognition
+* Text-to-speech responses using gTTS
+* Online AI responses via Google Gemini (streaming)
+* Offline AI fallback using Ollama + Mistral
+* Built-in commands:
+
+  * Current time
+  * Current date
+  * Exit / sleep
+* Continuous listening loop
+
+---
+
+## 🛠️ Tech Stack
+
+* **Language:** Python
+* **Libraries:**
+
+  * speech_recognition
+  * gTTS
+  * pygame
+  * google-generativeai
+* **Offline LLM:** Ollama (Mistral model)
+
+---
+
+## 📁 Project Structure
+
+```
+jarvis-ai-assistant/
+│
+├── jarvis.py
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/jarvis-ai-assistant.git
+cd jarvis-ai-assistant
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install speechrecognition gtts pygame google-generativeai
+```
+
+> ⚠️ **Note:** PyAudio is required for microphone access.
+
+---
+
+## 🔑 Gemini API Setup
+
+Update the following line in the source code:
+
+```python
+genai.configure(api_key="Your_api_key")
+```
+
+Replace `"Your_api_key"` with your actual **Google Gemini API key**.
+
+---
+
+## 📴 Offline AI Setup (Optional)
+
+Install Ollama and pull the Mistral model:
+
+```bash
 ollama pull mistral
+```
 
-Warm-up (run once)
-ollama run mistral
+Ensure `ollama` is available in your system PATH.
 
-🔑 Gemini API Key Setup
+---
 
-Visit: https://aistudio.google.com/app/apikey
+## ▶️ Running the Assistant
 
-Generate an API key
-
-Paste it in the code:
-
-genai.configure(api_key="YOUR_API_KEY_HERE")
-
-
-⚠️ Never commit your API key to GitHub
-
-▶️ How to Run
+```bash
 python jarvis.py
+```
 
-🗣️ How to Use
+Say **"Jarvis"** to activate the assistant.
 
-Start the program
+---
 
-Say “Jarvis”
+## 🧪 Example Commands
 
-Ask questions or give commands:
+* Jarvis, what is the time?
+* Jarvis, what is today’s date?
+* Jarvis, explain artificial intelligence
+* Jarvis, go to sleep
 
-Example Commands
+---
 
-“What is machine learning?”
+## 🧠 How It Works
 
-“What is the time?”
+1. Continuously listens for the wake word
+2. Activates command mode
+3. Processes built-in commands locally
+4. Generates AI responses using Gemini
+5. Falls back to offline AI if needed
+6. Converts responses to speech
 
-“What is today’s date?”
+---
 
-“Explain neural networks”
+## ⚠️ Limitations (Version 1)
 
-“Sleep” / “Exit”
+* No long-term memory
+* No system automation
+* Single wake word
+* Limited command handling
+* No graphical interface
 
-🧪 Example Interaction
-You: Jarvis
-Jarvis: Yes?
+---
 
-You: What is artificial intelligence?
-Jarvis: Artificial intelligence enables machines to simulate human thinking and decision-making.
+## 🚀 Future Roadmap
 
-You: What is the time?
-Jarvis: It is 10:45 AM
+* Contextual and long-term memory
+* Desktop and system automation
+* Plugin-based command architecture
+* Web search integration
+* Task scheduling and reminders
+* Multi-language support
+* Improved offline reasoning
+* GUI dashboard
 
-⚙️ Configuration Options
+---
 
-You can tune AI behavior here:
+## 🎯 Project Vision
 
-generation_config={
-    "temperature": 0.7,
-    "max_output_tokens": 200
-}
+The aim of this project is to build a **proper AI assistant like Jarvis**, capable of understanding, reasoning, and executing real-world tasks.
 
+---
 
-Lower temperature → more factual answers
+## 👤 Author
 
-Fewer tokens → faster responses
-
-🚀 Future Enhancements
-
-🔐 Voice authentication
-
-🧠 Long-term memory
-
-🌐 Web search integration
-
-🪟 Open applications via voice
-
-⚡ Faster offline TTS
-
-📦 Windows .exe build
-
-🧑‍💻 Author
-
-Sumit Kalamkar
+**Sumit Kalamkar**
 B.Tech – Artificial Intelligence & Machine Learning
 
-📄 License
+---
 
-This project is licensed under the MIT License.
-Feel free to use, modify, and learn from it.
+## 📜 License
+
+This project is open-source and intended for learning and experimentation.
+
